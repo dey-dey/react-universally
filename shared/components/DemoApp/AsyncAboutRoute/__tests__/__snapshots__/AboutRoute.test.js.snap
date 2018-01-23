@@ -17,17 +17,24 @@ exports[`<AboutRoute /> renders 1`] = `
     </title>
   </HelmetWrapper>
   <p>
-    Produced with ❤️
+    Produced with
+    &nbsp;
+    <span
+      aria-label="heart"
+      role="img"
+    >
+      ❤️
+    </span>
   </p>
   <p>
     View our contributors list on our
-     
+    &nbsp;
     <a
       href="https://github.com/ctrlplusb/react-universally"
     >
       GitHub
     </a>
-     
+    &nbsp;
     page.
   </p>
 </div>

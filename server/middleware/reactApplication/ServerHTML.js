@@ -43,8 +43,9 @@ function ServerHTML(props) {
   const { asyncComponentsState, helmet, nonce, reactAppString } = props;
 
   // Creates an inline script definition that is protected by the nonce.
-  const inlineScript = body =>
-    <script nonce={nonce} type="text/javascript" dangerouslySetInnerHTML={{ __html: body }} />;
+  const inlineScript = body => (
+    <script nonce={nonce} type="text/javascript" dangerouslySetInnerHTML={{ __html: body }} />
+  );
 
   const headerElements = removeNil([
     ...ifElse(helmet)(() => helmet.meta.toComponent(), []),
@@ -94,16 +95,10 @@ function ServerHTML(props) {
   return (
     <HTML
       htmlAttributes={ifElse(helmet)(() => helmet.htmlAttributes.toComponent(), null)}
-      headerElements={headerElements.map((x, idx) =>
-        (<KeyedComponent key={idx}>
-          {x}
-        </KeyedComponent>),
-      )}
-      bodyElements={bodyElements.map((x, idx) =>
-        (<KeyedComponent key={idx}>
-          {x}
-        </KeyedComponent>),
-      )}
+      headerElements={headerElements.map((x, idx) => (
+        <KeyedComponent key={idx}>{x}</KeyedComponent>
+      ))}
+      bodyElements={bodyElements.map((x, idx) => <KeyedComponent key={idx}>{x}</KeyedComponent>)}
       appBodyString={reactAppString}
     />
   );
@@ -111,11 +106,11 @@ function ServerHTML(props) {
 
 ServerHTML.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  asyncComponentsState: PropTypes.object,
+  asyncComponentsState: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  helmet: PropTypes.object,
-  nonce: PropTypes.string,
-  reactAppString: PropTypes.string,
+  helmet: PropTypes.required.object.isRequired,
+  nonce: PropTypes.required.string.isRequired,
+  reactAppString: PropTypes.required.string.isRequired,
 };
 
 // EXPORT
